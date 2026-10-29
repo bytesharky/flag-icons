@@ -1,0 +1,51 @@
+/* 404 — 与站点主风格一致的暗色主题 */
+:root{--bg:#0a0c11;--bg-soft:#10131b;--card:#141822;--card-2:#1a1f2b;--line:rgba(255, 255, 255, .09);--line-2:rgba(255, 255, 255, .16);--txt:#e8ecf4;--txt-2:#9aa4b8;--txt-3:#67718a;--accent:#7dd3fc;--accent-2:#a78bfa;--accent-soft:rgba(125, 211, 252, .12);--radius:14px;--mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(560px 320px at 12% -6%,rgba(125,211,252,.14),transparent 70%),radial-gradient(520px 300px at 88% 2%,rgba(167,139,250,.13),transparent 70%),radial-gradient(700px 420px at 50% 110%,rgba(125,211,252,.06),transparent 70%)}
+
+/* ---- 顶部导航（与主站一致） ---- */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,12,17,.72);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:24px;height:60px;max-width:1120px;margin:0 auto;padding:0 24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 12px rgba(125,211,252,.6)}
+nav .links{display:flex;gap:22px;margin-left:auto;font-size:14px;color:var(--txt-2)}
+nav .links a{color:var(--txt-2);text-decoration:none}
+nav .links a:hover{color:var(--txt)}
+
+/* ---- 主体 ---- */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:64px 24px}
+.box{width:100%;max-width:760px;text-align:center}
+.big{margin:0;font-size:clamp(96px,22vw,200px);line-height:.9;font-weight:800;letter-spacing:-4px;background:linear-gradient(120deg,#fff 8%,var(--accent) 52%,var(--accent-2) 96%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 1px 0 rgba(255,255,255,.04)}
+.code{display:inline-flex;align-items:center;gap:8px;margin:6px 0 18px;padding:5px 14px;border:1px solid var(--line-2);border-radius:999px;font-family:var(--mono);font-size:13px;color:var(--txt-2);background:rgba(255,255,255,.03);letter-spacing:1px}
+h1{margin:0 0 12px;font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.5px}
+.sub{margin:0 auto 8px;max-width:520px;color:var(--txt-2);font-size:16px}
+.hint{margin:0 auto;max-width:520px;color:var(--txt-3);font-size:13.5px}
+.hint code{font-family:var(--mono);color:var(--accent);padding:1px 6px;border:1px solid var(--line);border-radius:6px;font-size:12.5px}
+
+/* ---- 旗帜条（用真实 SVG 资源点缀） ---- */
+.strip{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:30px 0 34px}
+.strip .f{width:64px;height:48px;border-radius:5px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px -16px #000;background:#0d1016}
+.strip .f img{display:block;width:100%;height:100%;object-fit:cover}
+.strip.get .f{position:relative}
+.strip.get .f::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:22px;color:var(--txt-3);background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 7px,transparent 7px 14px)}
+
+/* ---- 操作按钮 ---- */
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{padding:12px 22px;border-radius:11px;font-size:14.5px;font-weight:600;font-family:inherit;cursor:pointer;text-decoration:none;transition:.16s;display:inline-flex;align-items:center;gap:8px}
+.btn.primary{border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent)}
+.btn.primary:hover{background:rgba(125,211,252,.2);transform:translateY(-2px)}
+.btn.ghost{border:1px solid var(--line-2);background:transparent;color:var(--txt-2)}
+.btn.ghost:hover{color:var(--txt);border-color:var(--accent)}
+
+footer{padding:30px 0 40px;border-top:1px solid var(--line);color:var(--txt-3);font-size:13px;text-align:center}
+footer a{color:var(--txt-3);text-decoration:none}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:560px){
+  nav .links{display:none}
+  .strip .f{width:48px;height:36px}
+  .actions{flex-direction:column}
+  .btn{justify-content:center}
+}

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>国旗图标库 · Flag Icons 示例与说明</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-icon.png">
+</head>
+
+<body>
+
+  <nav>
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span>Flag Icons</div>
+      <div class="links">
+        <a href="#gallery">旗帜预览</a>
+        <a href="#ratio">比例</a>
+        <a href="#usage">使用说明</a>
+        <a href="#region">地区名接口</a>
+        <a href="#download">下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="badge"><span class="pulse"></span>ISO 3166-1 alpha-2 · 纯 SVG 矢量 · 零依赖</div>
+      <h1>国旗图标库</h1>
+      <p class="sub">271 面旗帜，统一提供 4:3 与 1:1 两种比例的 SVG</p>
+      <p class="sub">没有多档位图尺寸的取舍烦恼，一个 SVG 适配所有尺寸，任意缩放不失真。</p>
+      <div class="stats">
+        <div class="stat"><b>271</b><span>面旗帜</span></div>
+        <div class="stat"><b>2</b><span>种比例</span></div>
+        <div class="stat"><b>SVG</b><span>统一格式</span></div>
+        <div class="stat"><b>542</b><span>个文件</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="gallery">
+    <div class="wrap">
+      <div class="head">
+        <div class="kicker">Gallery</div>
+        <h2>旗帜预览</h2>
+        <p>支持按代码（如 <code>cn</code>、<code>eu</code>）或名称（如「中国」「Japan」）搜索。点击任意旗帜即可复制该比例下的完整路径。</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-4.3-4.3" />
+          </svg>
+          <input id="q" type="search" placeholder="搜索：cn / 中国 / Japan，或粘贴完整 URI" autocomplete="off">
+        </div>
+        <div class="seg" id="fmt">
+          <button data-r="4x3" class="on">4:3</button>
+          <button data-r="1x1">1:1</button>
+        </div>
+        <select id="scale"></select>
+        <div class="count" id="count"></div>
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="ratio">
+    <div class="wrap">
+      <div class="head">
+        <div class="kicker">Aspect Ratio</div>
+        <h2>两种比例</h2>
+        <p>目录名就是比例。<code>4x3/</code> 为横向旗帜的标准矩形，<code>1x1/</code> 为方形裁切版；两个目录下的文件名完全一致，切换目录即可换比例。</p>
+      </div>
+
+      <div class="rcmp">
+        <div class="rcard">
+          <div class="rtop">
+            <span class="rbox r43"></span>
+            <h3>4:3<small>640 × 480 viewBox</small></h3>
+          </div>
+          <ul class="rlist">
+            <li>旗帜的<b>标准比例</b>，信息完整</li>
+            <li>适合<b>列表、表格、行内图标</b></li>
+            <li>配合 <code>aspect-ratio: 4 / 3</code></li>
+          </ul>
+          <div class="rtags">
+            <span class="chip hi">4x3/cn.svg</span><span class="chip">271 个文件</span><span class="chip">1.84 MB</span>
+          </div>
+        </div>
+
+        <div class="rcard">
+          <div class="rtop">
+            <span class="rbox r11"></span>
+            <h3>1:1<small>512 × 512 viewBox</small></h3>
+          </div>
+          <ul class="rlist">
+            <li>画面居中裁切成<b>正方形</b></li>
+            <li>适合<b>头像、圆形裁切、正方形宫格</b></li>
+            <li>配合 <code>aspect-ratio: 1 / 1</code></li>
+          </ul>
+          <div class="rtags">
+            <span class="chip hi">1x1/cn.svg</span><span class="chip">271 个文件</span><span class="chip">1.85 MB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-head">
+          <h4>实渲染对比</h4>
+          <span class="hint-s" id="demoMeta"></span>
+        </div>
+        <div class="demo-row" id="demoRow"></div>
+        <p class="hint">上面的比例按钮会同时作用于预览区；矢量源文件中两者的图形一致，只是画布裁切范围不同。</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>目录</th>
+            <th>viewBox</th>
+            <th>比例</th>
+            <th>文件数</th>
+            <th>适用场景</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>4x3/</td>
+            <td>0 0 640 480</td>
+            <td>4:3</td>
+            <td>271</td>
+            <td>默认选择，列表、表格、行内文字旁</td>
+          </tr>
+          <tr>
+            <td>1x1/</td>
+            <td>0 0 512 512</td>
+            <td>1:1</td>
+            <td>271</td>
+            <td>头像、圆形/方形容器、宫格卡片</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="usage">
+    <div class="wrap">
+      <div class="head">
+        <div class="kicker">Usage</div>
+        <h2>使用说明</h2>
+        <p>路径规则：<code>&lt;比例目录&gt;/&lt;代码&gt;.svg</code>，如 <code>4x3/cn.svg</code>、<code>1x1/us.svg</code>。可直接引用本站链接，也可下载后放进本地静态目录。</p>
+      </div>
+
+      <div class="tabrow">
+        <div class="tabs" id="tabs">
+          <button class="tab on" data-t="html">HTML</button>
+          <button class="tab" data-t="css">CSS</button>
+          <button class="tab" data-t="react">React</button>
+          <button class="tab" data-t="vue">Vue</button>
+          <button class="tab" data-t="cls">CSS 类</button>
+          <button class="tab" data-t="cli">批量 / 脚本</button>
+        </div>
+        <div class="seg" id="uriMode">
+          <button data-m="abs" class="on">含域名</button>
+          <button data-m="rel">不含域名</button>
+        </div>
+      </div>
+      <p class="hint" id="absNote" hidden>当前以本地文件方式打开，示例中的域名为占位符，请替换为你的实际域名。</p>
+
+      <div class="codebox">
+        <button class="copy" id="copyCode">复制</button>
+
+        <div class="pane on" data-p="html">
+          <pre><code>&lt;!-- ① 4:3 矩形：默认用法 --&gt;
+&lt;img src="{P}4x3/cn.svg" width="48" height="36" alt="中国"&gt;
+
+&lt;!-- ② 1:1 方形：头像 / 圆形容器 --&gt;
+&lt;img src="{P}1x1/cn.svg" width="48" height="48" alt="中国"&gt;
+
+&lt;!-- ③ 行内图标：宽高按 4:3 折算即可 --&gt;
+&lt;img src="{P}4x3/us.svg" width="20" height="15" alt="美国" loading="lazy"&gt;
+
+&lt;!-- ④ SVG 矢量，同一个文件可直接放大到任意尺寸 --&gt;
+&lt;img src="{P}4x3/cn.svg" width="320" height="240" alt="中国"&gt;</code></pre>
+        </div>
+
+        <div class="pane" data-p="css">
+          <pre><code>/* 4:3 背景图 */
+.flag-4x3 {
+  width: 48px;
+  aspect-ratio: 4 / 3;            /* 统一比例，避免布局跳动 */
+  background: url("{P}4x3/cn.svg") center / contain no-repeat;
+  border-radius: 3px;
+}
+
+/* 1:1 背景图 */
+.flag-1x1 {
+  width: 48px;
+  aspect-ratio: 1 / 1;
+  background: url("{P}1x1/cn.svg") center / cover no-repeat;
+  border-radius: 50%;             /* 圆形头像也能直接用 */
+}
+
+/* 行内图标：跟随字号 */
+.icon-flag {
+  background: url("{P}4x3/cn.svg") center / contain no-repeat;
+  width: 1.3333em; height: 1em;
+  display: inline-block;
+  vertical-align: -.125em;
+}</code></pre>
+        </div>
+
+        <div class="pane" data-p="react">
+          <pre><code>// Flag.jsx —— 只需传 ratio 即可切换方形 / 矩形
+const H = {"4x3": 0.75, "1x1": 1};
+
+const Flag = ({ code = "cn", ratio = "4x3", size = 48, alt = "" }) =&gt; {
+  const h = Math.round(size * H[ratio]);
+  const src = `{P}${ratio}/${code}.svg`;
+  return &lt;img src={src} width={size} height={h} alt={alt || code} loading="lazy" /&gt;;
+};
+
+export default function App() {
+  return (
+    &lt;div className="row"&gt;
+      &lt;Flag code="cn" alt="中国" /&gt;
+      &lt;Flag code="cn" ratio="1x1" alt="中国" /&gt;
+      &lt;Flag code="us" alt="United States" /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </div>
+
+        <div class="pane" data-p="vue">
+          <pre><code>&lt;!-- Flag.vue --&gt;
+&lt;script setup&gt;
+const props = defineProps({
+  code:  { type: String, default: "cn" },
+  ratio: { type: String, default: "4x3" },   // 4x3 | 1x1
+  size:  { type: Number, default: 48 },
+});
+const H = { "4x3": 0.75, "1x1": 1 };
+const h = computed(() =&gt; Math.round(props.size * H[props.ratio]));
+const src = computed(() =&gt; `{P}${props.ratio}/${props.code}.svg`);
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;img :src="src" :width="size" :height="h" :alt="code" loading="lazy" /&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+
+        <div class="pane" data-p="cli">
+          <pre><code>命名规则：  &lt;比例目录&gt;/&lt;代码&gt;.svg
+比例目录：  4x3（0 0 640 480）
+           1x1（0 0 512 512）
+数量：      每个目录 271 个文件，文件名一一对应
+
+# 只取需要的比例，删掉另一个目录即可
+rm -rf flags/1x1
+
+# 按名单拷贝：只打包用到的旗帜（Node 示例）
+# for (const c of ["cn","us","jp","eu"])
+#   cp(`flags/4x3/${c}.svg`, `dist/flags/${c}.svg`)
+
+# 内联合并成雪碧图（可选）
+# &lt;svg&gt;&lt;symbol id="cn" viewBox="0 0 640 480"&gt;...&lt;/symbol&gt;&lt;/svg&gt;
+
+# 需要位图时自行栅格化（需安装 librsvg）
+# rsvg-convert -w 96 -h 72 flags/4x3/cn.svg -o cn-96x72.png</code></pre>
+        </div>
+      </div>
+
+      <div class="pane" data-p="cls">
+          <pre><code>&lt;!-- 引入 flags.css --&gt;
+&lt;link rel="stylesheet" href="{P}flags.css"&gt;
+
+&lt;!-- 4:3 矩形：默认用法 --&gt;
+&lt;i class="flag-cn"&gt;&lt;/i&gt;
+
+&lt;!-- 1:1 方形：加 .fis 即可 --&gt;
+&lt;i class="flag-cn fis"&gt;&lt;/i&gt;
+
+&lt;!-- 用 --fs 控制高度（默认 1em） --&gt;
+&lt;i class="flag-us" style="--fs:32px"&gt;&lt;/i&gt;
+
+&lt;!-- 子区域同样适用：es-ct / gb-eng / sh-ac ... --&gt;
+&lt;i class="flag-es-ct"&gt;&lt;/i&gt;</code></pre>
+      </div>
+
+      <div class="notes">
+        <div class="note">
+          <h4>先选比例，再定尺寸</h4>
+          <p>没有位图尺寸档位的负担：宽 × 高按 <code>4:3</code> 或 <code>1:1</code> 折算即可，同一份 SVG 可用于任意场合。</p>
+        </div>
+        <div class="note">
+          <h4>别忘了 alt</h4>
+          <p>国旗是语义化图形，务必写 <code>alt</code>：纯装饰场景留空字符串，有含义时写国家/地区名。</p>
+        </div>
+        <div class="note">
+          <h4>固定宽高</h4>
+          <p>始终显式声明 <code>width/height</code>，或用 CSS <code>aspect-ratio: 4/3</code> / <code>1/1</code>，避免加载完成时的布局抖动。</p>
+        </div>
+        <div class="note">
+          <h4>代码小写</h4>
+          <p>文件名一律使用小写 ISO 3166-1 alpha-2 代码；子区域为 <code>gb-eng</code>、<code>es-ct</code>、<code>sh-ac</code> 这类连字符形式。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="region">
+    <div class="wrap">
+      <div class="head">
+        <div class="kicker">Edge Function</div>
+        <h2>地区名接口 · region-name</h2>
+        <p>传入一个地区代码，返回对应的中文 / 英文地区名。配合上面的旗帜资源，一次请求即可拼出「旗帜 + 名称」。</p>
+      </div>
+
+      <div class="try">
+        <div class="try-bar">
+          <div class="try-f">
+            <label for="rnCode">code</label>
+            <input id="rnCode" value="cn" placeholder="cn / CHN / 156 / gb-eng" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="seg" id="rnLang">
+            <button data-l="zh" class="on">中文</button>
+            <button data-l="en">English</button>
+          </div>
+          <button class="run" id="rnRun">请求</button>
+        </div>
+        <div class="try-url" id="rnUrl"></div>
+        <div class="try-body">
+          <pre class="try-out"><code id="rnOut">// 点击「请求」，这里会显示真实返回的 JSON</code></pre>
+          <div class="try-prev" id="rnPrev"></div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>参数</th>
+            <th>必填</th>
+            <th>取值</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>code</td>
+            <td>是</td>
+            <td>cn / CHN / 156</td>
+            <td>支持 ISO alpha-2、alpha-3 与 UN M49 三位数字码，大小写不敏感；子区域可用 <code>gb-eng</code>、<code>es-ct</code>、<code>sh-ac</code></td>
+          </tr>
+          <tr>
+            <td>lang</td>
+            <td>否</td>
+            <td>zh / en（默认 en）</td>
+            <td>返回名称的语言；不是 <code>zh</code> 时一律按英文处理</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-h">返回示例</h3>
+      <div class="snip">
+        <div class="snip-item">
+          <div class="snip-t ok">命中 · 200</div>
+<pre><code>GET /region-name?code=chn&amp;lang=zh
+
+{
+  "ok": true,
+  "code": "cn",
+  "lang": "zh",
+  "name": "中国"
+}</code></pre>
+        </div>
+        <div class="snip-item">
+          <div class="snip-t warn">查不到 · 200</div>
+<pre><code>GET /region-name?code=qqq&amp;lang=zh
+
+{
+  "ok": false,
+  "code": "qqq",
+  "lang": "zh"
+}</code></pre>
+        </div>
+        <div class="snip-item">
+          <div class="snip-t err">缺参数 · 400</div>
+<pre><code>GET /region-name
+
+{
+  "ok": false,
+  "error": "缺少 code 参数"
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap">
+      <div class="head">
+        <div class="kicker">Download</div>
+        <h2>打包下载</h2>
+        <p>按需取用即可，不必整包下载。整套资源未压缩仅 3.69 MB，下面两个压缩包各包含 271 个 SVG。</p>
+      </div>
+      <p class="hint">共 2 个压缩包 · 合计 1.29 MB · 点击任意一项即开始下载</p>
+      <div class="dl-group">
+        <h3>SVG 矢量 <span>2 个包</span></h3>
+        <div class="dl-grid">
+          <a class="dl" href="download/flag_4x3.zip" download><b>flag_4x3.zip</b><i>0.65 MB · 271 个文件</i></a>
+          <a class="dl" href="download/flag_1x1.zip" download><b>flag_1x1.zip</b><i>0.65 MB · 271 个文件</i></a>
+          <a class="dl" href="https://github.com/bytesharky/flag-icons" target="_blank"><b>网站源码</b><i>GitHub</i></a>
+        </div>
+      </div>
+      <p class="hint">目录结构：<code>flag_4x3.zip</code> 解压为 <code>4x3/*.svg</code>，<code>flag_1x1.zip</code> 解压为 <code>1x1/*.svg</code>；两者文件名完全一致。</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>Flag Icons · 271 面旗帜 · 2 种比例 · 542 个 SVG 文件</span>
+      <span>Sharky © 2026 · MIT License</span>
+    </div>
+  </footer>
+
+  <div id="toast"></div>
+  <button id="backTop" title="回到顶部" aria-label="回到顶部"></button>
+
+  <script src="assets/flag.js"></script>
+  <script src="assets/backtop.js"></script>
+
+</body>
+
+</html>

@@ -76,13 +76,13 @@ function codeToAlpha2(code) {
     "410":"KR","096":"BN","116":"KH","360":"ID","418":"LA","458":"MY","104":"MM","608":"PH","702":"SG","764":"TH",
     "626":"TL","704":"VN","004":"AF","050":"BD","064":"BT","356":"IN","364":"IR","462":"MV","524":"NP","586":"PK",
     "144":"LK","051":"AM","031":"AZ","048":"BH","196":"CY","268":"GE","368":"IQ","376":"IL","400":"JO","414":"KW",
-    "422":"LB","512":"OM","634":"QA","682":"SA","275":"PS","760":"SY","792":"TR","784":"AE","887":"YE",
+    "422":"LB","512":"OM","634":"QA","682":"SA","275":"PS","760":"SY","792":"TR","784":"AE","887":"YE","158":"TW",
     // alpha3 三位字母
     "ATA":"AQ","KAZ":"KZ","KGZ":"KG","TJK":"TJ","TKM":"TM","UZB":"UZ","CHN":"CN","PRK":"KP","JPN":"JP","MNG":"MN",
     "KOR":"KR","BRN":"BN","KHM":"KH","IDN":"ID","LAO":"LA","MYS":"MY","MMR":"MM","PHL":"PH","SGP":"SG","THA":"TH",
     "TLS":"TL","VNM":"VN","AFG":"AF","BGD":"BD","BTN":"BT","IND":"IN","IRN":"IR","MDV":"MV","NPL":"NP","PAK":"PK",
     "LKA":"LK","ARM":"AM","AZE":"AZ","BHR":"BH","CYP":"CY","GEO":"GE","IRQ":"IQ","ISR":"IL","JOR":"JO","KWT":"KW",
-    "LBN":"LB","OMN":"OM","QAT":"QA","SAU":"SA","PSE":"PS","SYR":"SY","TUR":"TR","ARE":"AE","YEM":"YE",
+    "LBN":"LB","OMN":"OM","QAT":"QA","SAU":"SA","PSE":"PS","SYR":"SY","TUR":"TR","ARE":"AE","YEM":"YE","TWN":"TW",
 
     // ========== 欧洲 ==========
     // M49 三位数字

@@ -29,12 +29,12 @@ let css = `/* flags.css — 由 assets/gen-flags.mjs 自动生成，请勿手改
 /* 基础样式：匹配所有 .flag-xxx */
 [class*="flag-"] {
   display: inline-block;
-  height: var(--fs, 1em);          /* 4:3 时宽度由 aspect-ratio 推导 */
+  height: var(--fs, 1em);             /* 4:3 时宽度由 aspect-ratio 推导 */
   aspect-ratio: 4 / 3;
-  background-color: #e9ecef;       /* SVG 加载前的占位底色 */
+  background-color: #e9ecef;        /* SVG 加载前的占位底色 */
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: cover;             /* 填充模式防止缩放精度出现露底 */
   vertical-align: -0.125em;
   border-radius: 2px;
   overflow: hidden;

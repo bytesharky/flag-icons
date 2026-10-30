@@ -185,7 +185,7 @@ function paintDemo() {
     if (vb) vb.innerHTML = `当前：<b>${ratio}</b> · 画布 ${RATIO_VIEWBOX[ratio].split(" ").slice(2).join(" × ")} · 渲染 ${w} × ${h} px`;
 }
 
-/* ---------- 边缘函数 region-name 试玩 ---------- */
+/* ---------- 边缘函数 region-name ---------- */
 (() => {
     const inp = $("#rnCode"), out = $("#rnOut"), urlEl = $("#rnUrl"),
         prev = $("#rnPrev"), run = $("#rnRun"), langBox = $("#rnLang");

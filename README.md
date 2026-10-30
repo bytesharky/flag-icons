@@ -8,21 +8,31 @@
 
 ```
 /
-├── index.html              # 预览 + 使用文档 + 接口说明（直接双击可看）
+├── index.html              # 预览 + 使用文档 + 接口说明
+├── 404.html                # 自定义 404 页面（样式见 assets/404.css）
+├── flags.css               # 类名方式样式（由 assets/gen-flags.mjs 生成，域名在生成阶段注入）
+├── README.md               # 本说明
+├── LICENSE                 # MIT License · © 2026 Sharky
+├── edgeone.json            # 腾讯 EdgeOne 部署配置（缓存头 / 内容类型）
+├── middleware.js           # EdgeOne Pages 中间件（404 路由重写）
 ├── 4x3/                    # 4:3 矩形旗帜，271 个 SVG（viewBox 0 0 640 480）
 ├── 1x1/                    # 1:1 方形旗帜，271 个 SVG（viewBox 0 0 512 512）
 ├── assets/
-│   ├── flag.js             # 预览页交互逻辑（搜索 / 比例切换 / 缩放）
-│   ├── style.css           # 页面样式
+│   ├── flag.js             # 预览页交互逻辑（搜索 / 比例切换 / 缩放 / 地区名接口）
+│   ├── style.css           # 预览页样式
+│   ├── 404.css             # 404 页面样式
+│   ├── gen-flags.mjs       # flags.css 生成器（唯一域名变量 FLAG_DOMAIN）
 │   ├── backtop.js          # 返回顶部
-│   ├── favicon.png
-│   └── apple-icon.png
+│   ├── favicon.png         # 浏览器图标
+│   └── apple-icon.png      # ios保存到桌面的图标
 ├── download/
 │   ├── flag_4x3.zip        # 4:3 全量打包（约 0.65 MB）
 │   └── flag_1x1.zip        # 1:1 全量打包（约 0.65 MB）
 └── edge-functions/
     └── region-name.js      # 边缘函数：code → 地区名（中/英）
 ```
+
+> 说明：`edgeone.json` 与 `middleware.js` 是部署到腾讯 EdgeOne 时使用的配置（缓存策略、`/404.html` 的 404 重写规则），纯静态托管可忽略；`.edgeone/`、`functions/` 等为平台运行时目录，不纳入版本管理。
 
 ---
 
@@ -45,6 +55,12 @@
 
 ---
 
+## 演示站点
+
+作者已发布在线演示：**https://flag.doffish.com/** — 可在线浏览全部旗帜、地区名接口，也是 `flags.css` 默认指向的域名（`https://flag.doffish.com/4x3/cn.svg`）。
+
+---
+
 ## 快速开始
 
 直接预览（`index.html` 使用相对路径引用资源，双击 `file://` 打开即可）：
@@ -55,7 +71,7 @@ python -m http.server 8000
 # 打开 http://127.0.0.1:8000
 ```
 
-> 提示：站点里的「地区名接口」试玩面板需要同源的 `/region-name` 路由；纯静态托管时该面板将无法请求，但页面其它功能不受影响。把 `edge-functions/region-name.js` 部署为边缘函数后即可使用（见下文）。
+> 提示：站点里的「地区名接口」测试面板需要同源的 `/region-name` 路由；纯静态托管时该面板将无法请求，但页面其它功能不受影响。把 `edge-functions/region-name.js` 部署为边缘函数后即可使用（见下文「部署到腾讯 EdgeOne」）。
 
 ---
 
@@ -195,6 +211,47 @@ if (r.ok) {
 ```
 
 > 本地调试：用任意 Node 静态服务 + 一个 `/region-name` 代理把请求转发给本文件的 `onRequestGet` 即可（预览用的临时服务就是这么接的）。
+
+---
+
+## 部署到腾讯 EdgeOne（Fork 即用）
+
+本项目可直接 **Fork** 后在 [腾讯云 EdgeOne](https://edgeone.ai/)（边缘安全加速平台 / **EdgeOne Pages**）一键发布，同时托管静态站点与 `region-name` 边缘函数。作者演示站点 **https://flag.doffish.com/** 即按此方式部署。
+
+**1. Fork 仓库**
+
+点击右上角 **Fork** 把仓库复制到你的账号。整个站点以本目录（`flag/flag/`）为根，结构即上方「目录结构」所示。
+
+**2. 在 EdgeOne Pages 创建项目并连接仓库**
+
+- 进入 EdgeOne 控制台 → **Pages / 边缘 Pages** → 新建项目 → 选择你 Fork 后的 Git 仓库。
+- 构建配置：
+  - **根目录 / 输出目录**：填本站点所在目录（即包含 `index.html` 与 `4x3/`、`1x1/`、`assets/`、`edge-functions/` 的那一层）。
+  - **构建命令**：留空（纯静态，无需构建）。
+  - **输出目录**：同上根目录（直接发布根目录内容）。
+
+**3. 挂载边缘函数 `region-name`**
+
+EdgeOne Pages 的边缘函数约定放在 `edge-functions/` 目录、按路径路由，并支持 `onRequestGet` 这类方法级导出（本项目 `region-name.js` 正是该风格），可直接使用。
+
+> 若你的 EdgeOne 版本使用其它函数目录约定（如 `_functions/` 或 `functions/`），按平台指引放置 `region-name.js` 即可，函数导出签名 `onRequestGet` 无需改动。
+
+```bash
+# 在本站点根目录下，让路由 /region-name 命中该边缘函数
+mkdir -p functions
+cp edge-functions/region-name.js functions/region-name.js
+```
+
+**4. 发布并绑定域名**
+
+- 保存后 EdgeOne 会自动构建并分配一个 `*.edgeone.app` 预览域名；推送 / 重新部署即更新。
+- 如需自定义域名（如 `flag.yourdomain.com`），在控制台 **域名 / 绑定** 处添加并配置 CNAME 即可。要把 `flags.css` 的默认域名改为你的域名，编辑 `assets/gen-flags.mjs` 顶部的 `FLAG_DOMAIN` 后重新生成 `flags.css`。
+
+**5. 验证**
+
+打开你的站点域名，确认：
+- 旗帜预览、比例切换、使用说明均正常；
+- 访问 `https://你的域名/region-name?code=cn&lang=zh` 返回 `{"ok":true,"code":"cn","lang":"zh","name":"中国"}`。
 
 ---
 

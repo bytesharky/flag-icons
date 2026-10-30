@@ -2,3 +2,6 @@
 .env
 .edgeone/*
 .tef_dist/*
+
+# 构建产物（由 build.mjs 生成，运行时按域名注入；不入库）
+dist/flags.css
